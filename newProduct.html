@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./newProduct.css">
+</head>
+
+<body>
+    <button class="back-to-main-page-button"> <a href="./main.html">вернуться</a></button>
+    <div class="create-product-main">
+        <div class="create-container">
+            <input type="file" class="input-icon">
+            <input type="text" minlength="6" placeholder="введите название товара" class="input-name">
+            <input type="number" placeholder="введите цену товара" class="input-price">
+            <input type="text" placeholder="введите артикул (9 символов)" pattern="[0-9]{9}" minlength="9" maxlength="9"
+                class="input-index">
+            <button class="add-product-button">
+                Добавить
+            </button>
+        </div>
+    </div>
+    <script src="./newProduct.js"></script>
+</body>
+
+</html>
