@@ -6,7 +6,6 @@ const createButton = document.querySelector('.add-product-button')
 const inputFile = document.querySelector('.input-icon')
 const productsContainer = document.querySelector('.products-container')
 
-
 let indexs = []
 
 try {
@@ -18,20 +17,14 @@ try {
     })
 } catch (error) {
     console.log(error.message)
+
 }
-
-
-/** 
-const saveImageToLocalStorage = () => {
-    const path = userAvatar.src
-    localStorage.setItem('pathImage', path)
-}*/
-
 
 
 class createProduct {
     constructor(name, price, index, fileInput) {
         this.loadAllIndexsFromLocalStorage()
+
         if (!name) {
             console.log('введите название товара')
             return
@@ -41,6 +34,7 @@ class createProduct {
         } else {
             this.name = name
         }
+
         if (!price) {
             console.log('введите цену товара')
             return
@@ -50,6 +44,7 @@ class createProduct {
         } else {
             this.price = price
         }
+
         if (!index) {
             console.log('введите артикул товара')
             return
@@ -67,6 +62,7 @@ class createProduct {
                 this.saveAllIndexsToLocaleStorage()
             }
         }
+
         if (!fileInput || !fileInput.files || fileInput.files.length === 0) {
             console.log('выберите файл для товара')
             return
@@ -75,24 +71,21 @@ class createProduct {
         }
 
     }
+
     createNewProduct() {
         if (this.name && this.price && this.index && this.file) {
-            const newProduct = document.createElement('div')
-            newProduct.classList.add('product')
-            newProduct.innerHTML = ` <img src="./product images/photo_2024-10-12_00-38-17.jpg" width="100px" height="100px"
-                        class="product-icon" alt="product image">
-                    <div class="product-all-info">
-                        <div class="product-name"> ${this.name}</div>
-                        <div class="product-price">${this.price}$</div>
-                        <div class="product-index">${this.index} </div>
-                        <button class="buy-product">buy</button>
-                    </div>`
-            this.saveProductToLocalStorage()
+            const reader = new FileReader()
+            reader.onload = (e) => {
+                this.imageBase64 = e.target.result
+                this.saveProductToLocalStorage()
+            }
+            reader.readAsDataURL(this.file)
         } else {
             console.log('что-то пошло не так... ')
         }
 
     }
+
     saveProductToLocalStorage() {
         const existingProducts = JSON.parse(localStorage.getItem('products')) || []
         const productData = {
@@ -100,6 +93,7 @@ class createProduct {
             price: this.price,
             index: this.index,
             fileName: this.file.name,
+            imageBase64: this.imageBase64,
             created: new Date().toISOString()
         }
         existingProducts.push(productData)
@@ -115,10 +109,11 @@ class createProduct {
     }
 
     saveAllIndexsToLocaleStorage() {
-        const allIndexs = JSON.stringify(indexs)
+        const allIndexs = JSON.stringify(indexs || [])
         localStorage.setItem('indexs', allIndexs)
 
     }
+
     loadAllIndexsFromLocalStorage() {
         const allIndexs = JSON.parse(localStorage.getItem('indexs'))
         indexs = allIndexs || []
@@ -129,14 +124,17 @@ try {
     document.addEventListener('keyup', (event) => {
         if (event.key === 'Enter') {
             const newProductObj = new createProduct(inputName.value, inputPrice.value, inputIndex.value, inputFile)
-            newProductObj.createNewProduct()
+            if (newProductObj.name) {
+                newProductObj.createNewProduct()
+            }
         }
     })
 
     createButton.addEventListener('click', () => {
         const newProductObj = new createProduct(inputName.value, inputPrice.value, inputIndex.value, inputFile)
-        newProductObj.createNewProduct()
-
+        if (newProductObj.name) {
+            newProductObj.createNewProduct()
+        }
     })
 } catch (error) {
     console.log(error.message)
