@@ -1,5 +1,6 @@
 body {
     background-color: rgb(241, 247, 252);
+    font-family: "Roboto", sans-serif;
 }
 
 a {
@@ -9,7 +10,7 @@ a {
 
 button {
     background-color: aliceblue;
-    border: 1px solid black;
+    border: 2px solid rgb(72, 72, 72);
     outline: none;
     border-radius: 5px;
     width: 150px;
@@ -32,7 +33,7 @@ button:hover {
 }
 
 .product-icon {
-    margin-inline:auto ;
+    margin-inline: auto;
 }
 
 .buy-product {
@@ -46,18 +47,64 @@ button:hover {
     position: relative;
     max-width: 200px;
     padding: 10px;
-    border: solid black 1px;
+    border: 2px rgb(116, 116, 116) solid;
     border-radius: 5px;
     display: flex;
     flex-direction: column;
     row-gap: 20px;
     height: 300px;
     margin: 20px;
-    
+
+}
+
+.product-price {
+    color: rgb(255, 116, 78);
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.product-index {
+    color: rgb(159, 159, 159);
+    font-style: italic;
+    font-size: 15px;
 }
 
 .product-all-info {
     row-gap: 10px;
     display: flex;
     flex-direction: column;
+}
+
+.search-container {
+    position: relative;
+    width: 350px;
+    margin-inline: auto;
+    padding-bottom: 20px;
+}
+
+.search-product {
+    width: 100%;
+    outline: none;
+    border: none;
+    background-color: rgb(241, 247, 252);
+    border-bottom: 1px solid black;
+
+    padding-right: 30px;
+}
+
+.search-container::after {
+    content: "";
+    position: absolute;
+    right: -25px;
+    top: 20%;
+    transform: translateY(-50%);
+    width: 16px;
+    height: 16px;
+    background-image: url('./icons/icons8-лупа.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+.search-container:hover::after {
+    cursor: text;
 }

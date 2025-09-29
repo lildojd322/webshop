@@ -1,0 +1,1 @@
+const inputSearc = document.querySelector('.')
