@@ -122,12 +122,17 @@ class createProduct {
 
 try {
     document.addEventListener('keyup', (event) => {
-        if (event.key === 'Enter') {
-            const newProductObj = new createProduct(inputName.value, inputPrice.value, inputIndex.value, inputFile)
-            if (newProductObj.name) {
-                newProductObj.createNewProduct()
+        try {
+            if (event.key === 'Enter') {
+                const newProductObj = new createProduct(inputName.value, inputPrice.value, inputIndex.value, inputFile)
+                if (newProductObj.name) {
+                    newProductObj.createNewProduct()
+                }
             }
+        } catch (error) {
+            console.log(error.message)
         }
+
     })
 
     createButton.addEventListener('click', () => {
