@@ -7,7 +7,9 @@ const searchProduct = () => {
     allProducts.forEach((product) => {
         const name = product.querySelector('.product-name').textContent.toLowerCase()
         const index = product.querySelector('.product-index').textContent.toLowerCase()
-        if (name.includes(searchTerm) || index.includes(searchTerm)) {
+        const filter = product.querySelector('.product-filter').textContent.toLowerCase()
+
+        if (name.includes(searchTerm) || index.includes(searchTerm) || filter.includes(searchTerm)) {
             product.style.display = 'flex'
         } else {
             product.style.display = 'none'

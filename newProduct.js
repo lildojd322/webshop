@@ -5,6 +5,7 @@ const inputIndex = document.querySelector('.input-index')
 const createButton = document.querySelector('.add-product-button')
 const inputFile = document.querySelector('.input-icon')
 const productsContainer = document.querySelector('.products-container')
+const selectInput = document.querySelector('select')
 
 let indexs = []
 
@@ -22,7 +23,7 @@ try {
 
 
 class createProduct {
-    constructor(name, price, index, fileInput) {
+    constructor(name, price, index, filter, fileInput) {
         this.loadAllIndexsFromLocalStorage()
 
         if (!name) {
@@ -43,6 +44,12 @@ class createProduct {
             return
         } else {
             this.price = price
+        }
+        if (!filter || filter === '-- Выберите фильтр --') {
+            console.log('выберите фильтр товара')
+            return
+        } else {
+            this.filter = filter
         }
 
         if (!index) {
@@ -73,7 +80,7 @@ class createProduct {
     }
 
     createNewProduct() {
-        if (this.name && this.price && this.index && this.file) {
+        if (this.name && this.price && this.index && this.file && this.filter) {
             const reader = new FileReader()
             reader.onload = (e) => {
                 this.imageBase64 = e.target.result
@@ -93,6 +100,7 @@ class createProduct {
             price: this.price,
             index: this.index,
             fileName: this.file.name,
+            filter: this.filter,
             imageBase64: this.imageBase64,
             created: new Date().toISOString()
         }
@@ -124,7 +132,7 @@ try {
     document.addEventListener('keyup', (event) => {
         try {
             if (event.key === 'Enter') {
-                const newProductObj = new createProduct(inputName.value, inputPrice.value, inputIndex.value, inputFile)
+                const newProductObj = new createProduct(inputName.value, inputPrice.value, inputIndex.value, selectInput.value, inputFile)
                 if (newProductObj.name) {
                     newProductObj.createNewProduct()
                 }
@@ -136,7 +144,7 @@ try {
     })
 
     createButton.addEventListener('click', () => {
-        const newProductObj = new createProduct(inputName.value, inputPrice.value, inputIndex.value, inputFile)
+        const newProductObj = new createProduct(inputName.value, inputPrice.value, inputIndex.value, selectInput.value, inputFile)
         if (newProductObj.name) {
             newProductObj.createNewProduct()
         }

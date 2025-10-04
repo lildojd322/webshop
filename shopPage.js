@@ -19,6 +19,7 @@ document.addEventListener('DOMContentLoaded', function () {
             <div class="product-price">${product.price} ₽</div>
                 <div class="product-name">${product.name}</div>
                 <div class="product-index">${product.index}</div>    
+                <div class="product-filter">${product.filter}</div>    
             </div>
             <button class="buy-product">buy</button>
         `
@@ -27,4 +28,4 @@ document.addEventListener('DOMContentLoaded', function () {
 })
 
 
-//     localStorage.removeItem('products')
+// localStorage.removeItem('products')
