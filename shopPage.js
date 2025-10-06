@@ -13,15 +13,15 @@ document.addEventListener('DOMContentLoaded', function () {
         const productElement = document.createElement('div')
         productElement.classList.add('product')
         productElement.innerHTML = `
-            <img src="${product.imageBase64}" width="140px" height="140px"
+            <img src="${product.imageBase64}" width="140px" height="150px"
                  class="product-icon" alt="${product.name}">
             <div class="product-all-info">
             <div class="product-price">${product.price} ₽</div>
                 <div class="product-name">${product.name}</div>
-                <div class="product-index">${product.index}</div>    
-                <div class="product-filter">${product.filter}</div>    
+                <div class="product-index">${product.index}</div>      
             </div>
-            <button class="buy-product">buy</button>
+              <div class="product-filter">${product.filter}</div>  
+            <button class="buy-product">в корзину</button>
         `
         productsContainer.appendChild(productElement)
     })

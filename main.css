@@ -109,7 +109,10 @@ button:hover {
 }
 
 .product-filter {
-    width: 80   px;
+    margin-bottom: 10px;
+    position: absolute;
+    bottom: 50px;
+    width: 80px;
     height: 15px;
     font-style: italic;
     font-size: 15px;
@@ -117,4 +120,16 @@ button:hover {
     background-color: rgb(214, 214, 214);
     border-radius: 5px;
     padding: 5px;
+}
+
+select {
+    border: 1px solid black;
+    border-radius: 5px;
+    height: 35px;
+    width: 250px;
+    outline: none;
+    color: black;
+    margin: 5px;
+    background-color: rgb(255, 255, 255);
+    margin-bottom: 10px;
 }
