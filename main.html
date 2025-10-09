@@ -14,6 +14,9 @@
 </head>
 
 <body>
+    <div class="search-container">
+        <input type="text" placeholder="Найти" class="search-product">
+    </div>
     <button class="add-my-product-button">
         <a href="./newProduct.html">добавить свой товар </a>
     </button>
@@ -22,24 +25,24 @@
 
         <div class="price-input-group">
             <label class="price-label">От</label>
-            <input type="text" class="price-input" id="first-input">
+            <input type="number" class="price-input" id="first-input">
         </div>
 
         <div class="price-input-group">
             <label class="price-label">До</label>
-            <input type="text" class="price-input" id="second-input">
+            <input type="number" class="price-input" id="second-input">
         </div>
+        <button class="range-button">применить </button>
     </div>
-    <div class="search-container">
-        <input type="text" placeholder="Найти" class="search-product">
-    </div>
+
     <select name="" id="">
+        <option value="все товары" selected>все товары</option>
         <option value="быт">быт</option>
         <option value="одежада">одежда</option>
         <option value="книги">книги</option>
         <option value="техника">техника</option>
         <option value="другое">другое</option>
-        <option value="все товары" selected>все товары</option>
+
     </select>
     <section class="main">
         <div class="products-container">

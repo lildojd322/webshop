@@ -1,5 +1,8 @@
 const selectElement = document.querySelector('select')
 
+const firstRangeInput = document.getElementById('first-input')
+const secondRangeInput = document.getElementById('second-input')
+const rangeButton = document.querySelector('.range-button')
 
 const filterChange = () => {
     const allProducts = document.querySelectorAll('.product')
@@ -17,4 +20,21 @@ const filterChange = () => {
 
 }
 
+const changePriceRange = () => {
+    const minPrice = +(firstRangeInput.value)
+    const maxPrice = +(secondRangeInput.value)
+    const allProducts = document.querySelectorAll('.product')
+    if (minPrice >= 0 && maxPrice > 0 && minPrice <= maxPrice) {
+        allProducts.forEach((product) => {
+            let productPrice = parseFloat(product.querySelector('.product-price').textContent)
+            if (productPrice <= maxPrice && productPrice >= minPrice) {
+                product.style.display = 'flex'
+            } else {
+                product.style.display = 'none'
+            }
+        })
+    }
+}
+
+rangeButton.addEventListener('click', changePriceRange)
 selectElement.addEventListener('change', filterChange)
