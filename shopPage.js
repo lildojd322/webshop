@@ -12,8 +12,11 @@ document.addEventListener('DOMContentLoaded', function () {
     products.forEach(product => {
         const productElement = document.createElement('div')
         productElement.classList.add('product')
+        productElement.addEventListener('click', () =>{
+            this.location.href ='./innerProduct.html'
+        })
         productElement.innerHTML = `
-            <img src="${product.imageBase64}" width="140px" height="150px"
+            <img  src="${product.imageBase64}" width="140px" height="150px"
                  class="product-icon" alt="${product.name}">
             <div class="product-all-info">
             <div class="product-price">${product.price} ₽</div>
@@ -25,7 +28,11 @@ document.addEventListener('DOMContentLoaded', function () {
         `
         productsContainer.appendChild(productElement)
     })
+
+
 })
+
+
 
 
 // localStorage.removeItem('products')

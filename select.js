@@ -35,6 +35,11 @@ const changePriceRange = () => {
         })
     }
 }
+document.addEventListener('keyup', (event) => {
+    if (event.code === 'Enter') {
+        changePriceRange()
+    }
+})
 
 rangeButton.addEventListener('click', changePriceRange)
 selectElement.addEventListener('change', filterChange)
