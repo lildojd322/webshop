@@ -76,8 +76,10 @@ button:hover {
 
 .search-container {
     margin-top: 20px;
-    position: relative;
+
+    position: absolute;
     width: 350px;
+    right: 50%;
     margin-inline: auto;
     padding-bottom: 20px;
 }
