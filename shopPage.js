@@ -12,9 +12,18 @@ document.addEventListener('DOMContentLoaded', function () {
     products.forEach(product => {
         const productElement = document.createElement('div')
         productElement.classList.add('product')
-        productElement.addEventListener('click', () =>{
-            this.location.href ='./innerProduct.html'
+        productElement.addEventListener('click', (event) => {
+            if (!event.target.classList.contains('buy-product')) {
+                localStorage.setItem('selectedProduct', JSON.stringify(product))
+                window.location.href = './innerProduct.html'
+            }
+
+
         })
+        if (window.location.href.includes('innerProduct.html')) {
+            const titleProductPage = document.querySelector('title')
+            titleProductPage.textContent = product.name
+        }
         productElement.innerHTML = `
             <img  src="${product.imageBase64}" width="140px" height="150px"
                  class="product-icon" alt="${product.name}">

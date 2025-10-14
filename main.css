@@ -62,6 +62,10 @@ button:hover {
     font-weight: 600;
 }
 
+.product:hover {
+    cursor: pointer;
+}
+
 .product-index {
     color: rgb(159, 159, 159);
     font-style: italic;
