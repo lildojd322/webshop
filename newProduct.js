@@ -1,11 +1,14 @@
 const form = document.querySelector('.form')
 const inputName = document.querySelector('.input-name')
 const inputPrice = document.querySelector('.input-price')
+const inputDescription = document.querySelector('.input-description')
 const inputIndex = document.querySelector('.input-index')
 const createButton = document.querySelector('.add-product-button')
 const inputFile = document.querySelector('.input-icon')
 const productsContainer = document.querySelector('.products-container')
 const selectInput = document.querySelector('select')
+
+
 
 let indexs = []
 
@@ -23,9 +26,8 @@ try {
 
 
 class createProduct {
-    constructor(name, price, index, filter, fileInput) {
+    constructor(name, price, index, filter, fileInput, description) {
         this.loadAllIndexsFromLocalStorage()
-
         if (!name) {
             console.log('введите название товара')
             return
@@ -34,6 +36,15 @@ class createProduct {
             return
         } else {
             this.name = name
+        }
+        if (!description) {
+            console.log('введите описание товара')
+            return
+        } else if (description.length < 6) {
+            console.log('описание товара должно содержать больше 6 символов')
+            return
+        } else {
+            this.description = description
         }
 
         if (!price) {
@@ -80,7 +91,7 @@ class createProduct {
     }
 
     createNewProduct() {
-        if (this.name && this.price && this.index && this.file && this.filter) {
+        if (this.name && this.price && this.index && this.file && this.filter && this.description) {
             const reader = new FileReader()
             reader.onload = (e) => {
                 this.imageBase64 = e.target.result
@@ -97,6 +108,7 @@ class createProduct {
         const existingProducts = JSON.parse(localStorage.getItem('products')) || []
         const productData = {
             name: this.name,
+            description: this.description,
             price: this.price,
             index: this.index,
             fileName: this.file.name,
@@ -110,6 +122,7 @@ class createProduct {
 
         console.log('Товар сохранен!')
         inputName.value = ''
+        inputDescription.value = ''
         inputPrice.value = ''
         inputIndex.value = ''
         inputFile.value = ''
@@ -132,7 +145,7 @@ try {
     document.addEventListener('keyup', (event) => {
         try {
             if (event.key === 'Enter') {
-                const newProductObj = new createProduct(inputName.value, inputPrice.value, inputIndex.value, selectInput.value, inputFile)
+                const newProductObj = new createProduct(inputName.value, inputPrice.value, inputIndex.value, selectInput.value, inputFile, inputDescription.value)
                 if (newProductObj.name) {
                     newProductObj.createNewProduct()
                 }
@@ -144,7 +157,7 @@ try {
     })
 
     createButton.addEventListener('click', () => {
-        const newProductObj = new createProduct(inputName.value, inputPrice.value, inputIndex.value, selectInput.value, inputFile)
+        const newProductObj = new createProduct(inputName.value, inputPrice.value, inputIndex.value, selectInput.value, inputFile, inputDescription.value   )
         if (newProductObj.name) {
             newProductObj.createNewProduct()
         }

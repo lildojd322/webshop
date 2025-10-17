@@ -5,6 +5,9 @@ document.addEventListener('DOMContentLoaded', () => {
         document.body.innerHTML = '<p>Товар не найден!</p>'
         throw new Error(errorMessage)
     }
+    if (product.description === undefined) {
+        product.description = 'описание отсутствует'
+    }
     document.title = product.name
     const productElement = document.createElement('div')
     productElement.classList.add('product-inner')
@@ -14,6 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
             <div class="product-inner-all-info">
             <div class="product-inner-price">${product.price} ₽</div>
                 <div class="product-inner-name">${product.name}</div>
+                 <div class="product-inner-description">${product.description}</div>
                 <div class="product-inner-index">${product.index}</div>      
             </div>
               <div class="product-inner-filter">${product.filter}</div>  

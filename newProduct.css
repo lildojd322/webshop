@@ -25,7 +25,9 @@ input::file-selector-button {
     display: none;
 }
 
-input {
+input,
+textarea {
+    resize: none;
     border: 1px solid black;
     border-radius: 5px;
     height: 35px;
