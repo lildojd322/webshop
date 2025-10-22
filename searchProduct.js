@@ -26,8 +26,17 @@ const initializeSearchPage = () => {
         }
 
         filteredProducts.forEach((product) => {
+        
             const productElement = document.createElement('div')
             productElement.classList.add('product')
+            productElement.addEventListener('click', (event) => {
+                if (!event.target.classList.contains('buy-product')) {
+                    localStorage.setItem('selectedProduct', JSON.stringify(product))
+                    window.location.href = './innerProduct.html'
+                }
+
+
+            })
             productElement.innerHTML = `
                     <img src="${product.imageBase64}" width="140px" height="150px"
                          class="product-icon" alt="${product.name}">

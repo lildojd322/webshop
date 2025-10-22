@@ -25,15 +25,15 @@ document.addEventListener('DOMContentLoaded', function () {
             titleProductPage.textContent = product.name
         }
         productElement.innerHTML = `
-            <img  src="${product.imageBase64}" width="140px" height="150px"
-                 class="product-icon" alt="${product.name}">
-            <div class="product-all-info">
-            <div class="product-price">${product.price} ₽</div>
-                <div class="product-name">${product.name}</div>
-                <div class="product-index">${product.index}</div>      
-            </div>
-              <div class="product-filter">${product.filter}</div>  
-            <button class="buy-product">в корзину</button>
+                <img  src="${product.imageBase64}" width="140px" height="150px"
+                    class="product-icon" alt="${product.name}">
+                <div class="product-all-info">
+                <div class="product-price">${product.price} ₽</div>
+                    <div class="product-name">${product.name}</div>
+                    <div class="product-index">${product.index}</div>      
+                </div>
+                <div class="product-filter">${product.filter}</div>  
+                <button class="buy-product">в корзину</button>
         `
         productsContainer.appendChild(productElement)
     })
