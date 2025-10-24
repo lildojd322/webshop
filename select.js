@@ -24,10 +24,15 @@ const changePriceRange = () => {
     const minPrice = +(firstRangeInput.value)
     const maxPrice = +(secondRangeInput.value)
     const allProducts = document.querySelectorAll('.product')
+    
     if (minPrice >= 0 && maxPrice > 0 && minPrice <= maxPrice) {
         allProducts.forEach((product) => {
             let productPrice = parseFloat(product.querySelector('.product-price').textContent)
-            if (productPrice <= maxPrice && productPrice >= minPrice) {
+            const productCategory = product.querySelector('.product-filter').textContent.toLowerCase().trim()
+            const selectedCategory = selectElement.value.toLowerCase().trim()
+            
+            if (productPrice >= minPrice && productPrice <= maxPrice && 
+                (productCategory === selectedCategory || selectedCategory === 'все товары')) {
                 product.style.display = 'flex'
             } else {
                 product.style.display = 'none'

@@ -26,7 +26,7 @@ const initializeSearchPage = () => {
         }
 
         filteredProducts.forEach((product) => {
-        
+
             const productElement = document.createElement('div')
             productElement.classList.add('product')
             productElement.addEventListener('click', (event) => {
