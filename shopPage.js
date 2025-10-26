@@ -1,5 +1,20 @@
 document.addEventListener('DOMContentLoaded', function () {
+    let numberProductsInCart
+    const saveNumberProductInLocalStorage = () => {
+        numberProductsInCart = +(indexDisplayCart.textContent) || 0
+        localStorage.setItem('indexProducts', numberProductsInCart)
+    }
+
+    const loadNumberProductFromLocalStorage = () => {
+        numberProductsInCart = +(localStorage.getItem('indexProducts'))
+    }
+    loadNumberProductFromLocalStorage()
+    const stylesCart = window.getComputedStyle(document.querySelector('.cart'), '::after')
+    const indexDisplayCart = +(stylesCart.getPropertyValue('content'))
+    const cart = document.querySelector('.cart')
+
     const productsContainer = document.querySelector('.products-container')
+
     if (!productsContainer) return
 
     const products = JSON.parse(localStorage.getItem('products')) || []
@@ -9,6 +24,8 @@ document.addEventListener('DOMContentLoaded', function () {
         return
     }
 
+
+
     products.forEach(product => {
         const productElement = document.createElement('div')
         productElement.classList.add('product')
@@ -17,15 +34,13 @@ document.addEventListener('DOMContentLoaded', function () {
                 localStorage.setItem('selectedProduct', JSON.stringify(product))
                 window.location.href = './innerProduct.html'
             }
-
-
         })
         if (window.location.href.includes('innerProduct.html')) {
             const titleProductPage = document.querySelector('title')
             titleProductPage.textContent = product.name
         }
         productElement.innerHTML = `
-                <img  src="${product.imageBase64}" width="140px" height="150px"
+                <img  src="${product.imageBase64}" width="140px" height="170px"
                     class="product-icon" alt="${product.name}">
                 <div class="product-all-info">
                 <div class="product-price">${product.price} ₽</div>
@@ -37,7 +52,18 @@ document.addEventListener('DOMContentLoaded', function () {
         `
         productsContainer.appendChild(productElement)
     })
+    const addProductInCartButtons = document.querySelectorAll('.buy-product')
 
+    console.log(addProductInCartButtons)
+
+    addProductInCartButtons.forEach(button => {
+        button.addEventListener('click', (event) => {
+            cart.style.cssText = 'display: flex;'
+            numberProductsInCart++
+            indexDisplayCart.textContent = numberProductsInCart
+            saveNumberProductInLocalStorage()
+        })
+    })
 
 })
 

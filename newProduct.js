@@ -34,7 +34,11 @@ class createProduct {
         } else if (name.length < 6) {
             console.log('название товара должно содержать больше 6 символов')
             return
-        } else {
+        } else if (name.length > 45) {
+            console.log('название товара не должен содержать больше 35 символов')
+            return
+        }
+        else {
             this.name = name
         }
         if (!description) {
@@ -157,7 +161,7 @@ try {
     })
 
     createButton.addEventListener('click', () => {
-        const newProductObj = new createProduct(inputName.value, inputPrice.value, inputIndex.value, selectInput.value, inputFile, inputDescription.value   )
+        const newProductObj = new createProduct(inputName.value, inputPrice.value, inputIndex.value, selectInput.value, inputFile, inputDescription.value)
         if (newProductObj.name) {
             newProductObj.createNewProduct()
         }
