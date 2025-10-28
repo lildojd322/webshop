@@ -1,7 +1,8 @@
 document.addEventListener('DOMContentLoaded', function () {
+    const cartSquareElement = document.querySelector('.square-cart')
     let numberProductsInCart
     const saveNumberProductInLocalStorage = () => {
-        numberProductsInCart = +(indexDisplayCart.textContent) || 0
+        numberProductsInCart = +(cartSquareElement.textContent)
         localStorage.setItem('indexProducts', numberProductsInCart)
     }
 
@@ -9,10 +10,10 @@ document.addEventListener('DOMContentLoaded', function () {
         numberProductsInCart = +(localStorage.getItem('indexProducts'))
     }
     loadNumberProductFromLocalStorage()
-    const stylesCart = window.getComputedStyle(document.querySelector('.cart'), '::after')
-    const indexDisplayCart = +(stylesCart.getPropertyValue('content'))
-    const cart = document.querySelector('.cart')
-
+    if (numberProductsInCart > 0) {
+        cartSquareElement.style.cssText = 'display: flex;'
+        cartSquareElement.textContent = numberProductsInCart
+    }
     const productsContainer = document.querySelector('.products-container')
 
     if (!productsContainer) return
@@ -53,19 +54,16 @@ document.addEventListener('DOMContentLoaded', function () {
         productsContainer.appendChild(productElement)
     })
     const addProductInCartButtons = document.querySelectorAll('.buy-product')
-
-    console.log(addProductInCartButtons)
-
     addProductInCartButtons.forEach(button => {
         button.addEventListener('click', (event) => {
-            cart.style.cssText = 'display: flex;'
             numberProductsInCart++
-            indexDisplayCart.textContent = numberProductsInCart
+            cartSquareElement.textContent = numberProductsInCart
             saveNumberProductInLocalStorage()
         })
     })
 
 })
+
 
 
 

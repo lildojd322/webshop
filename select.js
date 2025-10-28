@@ -1,50 +1,30 @@
 const selectElement = document.querySelector('select')
-
 const firstRangeInput = document.getElementById('first-input')
 const secondRangeInput = document.getElementById('second-input')
 const rangeButton = document.querySelector('.range-button')
 
-const filterChange = () => {
-    const allProducts = document.querySelectorAll('.product')
-    allProducts.forEach((product) => {
-        product.style.display = 'flex'
-        if (product.querySelector('.product-filter').textContent.toLowerCase().trim() === selectElement.value.toLowerCase().trim()) {
-            product.style.display = 'flex'
-        } else if (selectElement.value.toLowerCase().trim() === 'все товары') {
-            product.style.display = 'flex'
-        } else {
-            product.style.display = 'none'
 
-        }
-    })
-
-}
-
-const changePriceRange = () => {
+const changePriceRangeAndFilter = () => {
     const minPrice = +(firstRangeInput.value)
     const maxPrice = +(secondRangeInput.value)
     const allProducts = document.querySelectorAll('.product')
-
-    if (minPrice >= 0 && maxPrice > 0 && minPrice <= maxPrice) {
-        allProducts.forEach((product) => {
-            let productPrice = parseFloat(product.querySelector('.product-price').textContent)
-            const productCategory = product.querySelector('.product-filter').textContent.toLowerCase().trim()
-            const selectedCategory = selectElement.value.toLowerCase().trim()
-
-            if (productPrice >= minPrice && productPrice <= maxPrice &&
-                (productCategory === selectedCategory || selectedCategory === 'все товары')) {
-                product.style.display = 'flex'
-            } else {
-                product.style.display = 'none'
-            }
-        })
-    }
+    const selectedCategory = selectElement.value.toLowerCase().trim()
+    allProducts.forEach((product) => {
+        const productCategory = product.querySelector('.product-filter').textContent.toLowerCase().trim()
+        const productPrice = parseFloat(product.querySelector('.product-price').textContent)
+        const categoryMatch = selectedCategory === 'все товары' || productCategory === selectedCategory
+        const priceMatch = (minPrice >= 0 && maxPrice > 0 && minPrice <= maxPrice)
+            ? (productPrice >= minPrice && productPrice <= maxPrice)
+            : true
+        product.style.display = 'flex'
+        product.style.display = (categoryMatch && priceMatch) ? 'flex' : 'none'
+    })
 }
 document.addEventListener('keyup', (event) => {
     if (event.code === 'Enter') {
-        changePriceRange()
+        changePriceRangeAndFilter()
     }
 })
 
-rangeButton.addEventListener('click', changePriceRange)
-selectElement.addEventListener('change', filterChange)
+rangeButton.addEventListener('click', changePriceRangeAndFilter)
+selectElement.addEventListener('change', changePriceRangeAndFilter)

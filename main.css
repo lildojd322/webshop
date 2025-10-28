@@ -225,20 +225,18 @@ price-input:focus {
 .cart {
     margin-top: 20px;
     position: absolute;
-    display: none;
     position: absolute;
     right: 35%;
 
     padding-bottom: 20px;
 }
 
-.cart::after {
-    content: "0";
+.square-cart {
+    display: none;
     justify-content: center;
     align-items: center;
     color: white;
     font-size: 10px;
-    display: flex;
     width: 15px;
     top: -4px;
     right: -10px;
