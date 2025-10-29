@@ -4,6 +4,7 @@ body {
     position: relative;
     align-items: center;
     background-color: #ffffff;
+    flex-direction: column;
 }
 
 .product-inner {
@@ -115,4 +116,9 @@ body {
     flex-direction: column;
     gap: 12px;
     margin-top: 20px;
+}
+
+.main-info {
+    width: 100%;
+    position: relative;
 }

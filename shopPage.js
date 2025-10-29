@@ -10,10 +10,16 @@ document.addEventListener('DOMContentLoaded', function () {
         numberProductsInCart = +(localStorage.getItem('indexProducts'))
     }
     loadNumberProductFromLocalStorage()
-    if (numberProductsInCart > 0) {
-        cartSquareElement.style.cssText = 'display: flex;'
-        cartSquareElement.textContent = numberProductsInCart
+    const checkNumber = () => {
+        if (numberProductsInCart > 0 && numberProductsInCart < 100) {
+            cartSquareElement.style.cssText = 'display: flex;'
+            cartSquareElement.textContent = numberProductsInCart
+        } else if (numberProductsInCart >= 100) {
+            cartSquareElement.style.cssText = 'display: flex;'
+            cartSquareElement.textContent = `+99`
+        }
     }
+    checkNumber()
     const productsContainer = document.querySelector('.products-container')
 
     if (!productsContainer) return
@@ -59,13 +65,12 @@ document.addEventListener('DOMContentLoaded', function () {
             numberProductsInCart++
             cartSquareElement.textContent = numberProductsInCart
             saveNumberProductInLocalStorage()
+            checkNumber()
         })
     })
 
 })
 
 
-
-
-
+//localStorage.removeItem('indexProducts')
 // localStorage.removeItem('products')

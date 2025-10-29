@@ -54,7 +54,7 @@ class createProduct {
         if (!price) {
             console.log('введите цену товара')
             return
-        } else if (price <= 0) {
+        } else if (price <= 0 || price.length > 8) {
             console.log('цена товара не может быть такой')
             return
         } else {
