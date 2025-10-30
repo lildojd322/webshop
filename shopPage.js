@@ -30,7 +30,7 @@ document.addEventListener('DOMContentLoaded', function () {
         productsContainer.innerHTML = '<p>Товаров пока нет</p>'
         return
     }
-
+    let cartProducts = JSON.parse(localStorage.getItem('cartProducts')) || []
 
 
     products.forEach(product => {
@@ -40,6 +40,15 @@ document.addEventListener('DOMContentLoaded', function () {
             if (!event.target.classList.contains('buy-product')) {
                 localStorage.setItem('selectedProduct', JSON.stringify(product))
                 window.location.href = './innerProduct.html'
+            } else if (event.target.classList.contains('buy-product')) {
+                event.stopPropagation()
+                cartProducts.push(product)
+                localStorage.setItem('cartProducts', JSON.stringify(cartProducts))
+                console.log(product)
+                numberProductsInCart++
+                cartSquareElement.textContent = numberProductsInCart
+                saveNumberProductInLocalStorage()
+                checkNumber()
             }
         })
         if (window.location.href.includes('innerProduct.html')) {
@@ -59,15 +68,7 @@ document.addEventListener('DOMContentLoaded', function () {
         `
         productsContainer.appendChild(productElement)
     })
-    const addProductInCartButtons = document.querySelectorAll('.buy-product')
-    addProductInCartButtons.forEach(button => {
-        button.addEventListener('click', (event) => {
-            numberProductsInCart++
-            cartSquareElement.textContent = numberProductsInCart
-            saveNumberProductInLocalStorage()
-            checkNumber()
-        })
-    })
+
 
 })
 
