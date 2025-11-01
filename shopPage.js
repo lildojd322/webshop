@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', function () {
         numberProductsInCart = +(cartSquareElement.textContent)
         localStorage.setItem('indexProducts', numberProductsInCart)
     }
-
+    let thisLocation
     const loadNumberProductFromLocalStorage = () => {
         numberProductsInCart = +(localStorage.getItem('indexProducts'))
     }
@@ -72,6 +72,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
 })
 
-
+// localStorage.removeItem('cartProducts')
 //localStorage.removeItem('indexProducts')
 // localStorage.removeItem('products')

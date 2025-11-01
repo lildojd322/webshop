@@ -118,7 +118,6 @@ class createProduct {
             fileName: this.file.name,
             filter: this.filter,
             imageBase64: this.imageBase64,
-            created: new Date().toISOString()
         }
         existingProducts.push(productData)
 

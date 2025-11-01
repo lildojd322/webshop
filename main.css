@@ -30,7 +30,8 @@ button:hover {
     display: flex;
 }
 
-.products-container {
+.products-container,
+.all-cart-products {
     margin-inline: auto;
     display: grid;
     grid-template-columns: repeat(13, 13fr);
@@ -244,6 +245,11 @@ price-input:focus {
     height: 20px;
     border-radius: 50%;
     background-color: rgb(254, 80, 80);
+}
+
+.delete-product:hover {
+    background-color: rgb(254, 80, 80);
+    border: none;
 }
 
 @media (max-width: 1800px) {
