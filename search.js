@@ -1,4 +1,4 @@
-const inputSearch = document.querySelector('.search-product')   
+const inputSearch = document.querySelector('.search-product')
 const mainContainerProducts = document.querySelector('.products-container')
 
 const searchProduct = () => {

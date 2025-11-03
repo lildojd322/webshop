@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
            
               <div class="product-inner-filter">${product.filter}</div>  
             <button class="buy-inner-product">купить сейчас</button>
-            <button class="buy-inner-product">в корзину</button> 
+            <button class="buy-product">в корзину</button> 
             </div>
         `
     document.body.appendChild(productElement)

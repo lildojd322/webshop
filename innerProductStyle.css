@@ -45,7 +45,8 @@ body {
     flex-direction: column;
 }
 
-.buy-inner-product {
+.buy-inner-product,
+.buy-product {
     width: 100%;
     height: 45px;
     font-size: 18px;

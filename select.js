@@ -20,11 +20,6 @@ const changePriceRangeAndFilter = () => {
         product.style.display = (categoryMatch && priceMatch) ? 'flex' : 'none'
     })
 }
-document.addEventListener('keyup', (event) => {
-    if (event.code === 'Enter') {
-        changePriceRangeAndFilter()
-    }
-})
 
 rangeButton.addEventListener('click', changePriceRangeAndFilter)
 selectElement.addEventListener('change', changePriceRangeAndFilter)
