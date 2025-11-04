@@ -30,7 +30,7 @@ document.addEventListener('DOMContentLoaded', function () {
         productsContainer.innerHTML = '<p>Товаров пока нет</p>'
         return
     }
-    let cartProducts = JSON.parse(localStorage.getItem('cartProducts')) || []
+    let cartProductsIndexs = JSON.parse(localStorage.getItem('cartProductsIndexs')) || []
 
 
     products.forEach(product => {
@@ -42,9 +42,8 @@ document.addEventListener('DOMContentLoaded', function () {
                 window.location.href = './innerProduct.html'
             } else if (event.target.classList.contains('buy-product')) {
                 event.stopPropagation()
-                cartProducts.push(product)
-                localStorage.setItem('cartProducts', JSON.stringify(cartProducts))
-                console.log(product)
+                cartProductsIndexs.push(product.index)
+                localStorage.setItem('cartProductsIndexs', JSON.stringify(cartProductsIndexs))
                 numberProductsInCart++
                 cartSquareElement.textContent = numberProductsInCart
                 saveNumberProductInLocalStorage()
@@ -72,6 +71,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
 })
 
-// localStorage.removeItem('cartProducts')
-//localStorage.removeItem('indexProducts')
+const remove = () => {
+     localStorage.removeItem('cartProductsIndexs')
+    localStorage.removeItem('indexProducts')
+}
+// remove()
 // localStorage.removeItem('products')
