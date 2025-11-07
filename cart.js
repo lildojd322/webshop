@@ -3,6 +3,16 @@ document.addEventListener('DOMContentLoaded', () => {
     const cartProductsIndexs = JSON.parse(localStorage.getItem('cartProductsIndexs'))
     const products = JSON.parse(localStorage.getItem('products'))
     let numberProductsInCart = +(localStorage.getItem('indexProducts'))
+    const checkedProucts = () => {
+        if (cartProductsIndexs.length < 1) {
+            const productElement = document.createElement('div')
+            productElement.innerHTML = `
+            <p> Корзина пуста </p>
+        `
+            cartProductsContainer.appendChild(productElement)
+        }
+    }
+    checkedProucts()
 
     cartProductsIndexs.forEach(index => {
         products.forEach(product => {
@@ -21,7 +31,10 @@ document.addEventListener('DOMContentLoaded', () => {
                             localStorage.setItem('cartProductsIndexs', JSON.stringify(cartProductsIndexs))
                             numberProductsInCart--
                             localStorage.setItem('indexProducts', numberProductsInCart)
+                            calculateTheTotalAmount()
+                            checkedProucts()
                         }
+
                     }
                 })
                 productElement.innerHTML = `
@@ -41,6 +54,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
     })
 
+    const calculateTheTotalAmount = () => {
+        const allProductsInCart = document.querySelectorAll('.product')
+        let sumAllOf = 0
+        allProductsInCart.forEach(productElement => {
+            sumAllOf += parseFloat(productElement.querySelector('.product-price').textContent)
+        })
+        document.querySelector('.sum-of-all').textContent = `${sumAllOf}₽`
+    }
+    calculateTheTotalAmount()
 
 })
 
