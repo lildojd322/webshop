@@ -281,6 +281,20 @@ price-input:focus {
     font-size: 18px;
 }
 
+@keyframes money-animation {
+    from {
+        transform: scale(1);
+    }
+
+    to {
+        transform: scale(1.2);
+    }
+}
+
+.sum-of-all {
+    transition: text-content 0.5s ease-in-out;
+    animation: money-animation 0.5s forwards;
+}
 
 @media (max-width: 1800px) {
     .products-container {

@@ -54,14 +54,34 @@ document.addEventListener('DOMContentLoaded', () => {
 
     })
 
+    const animateNumber = (element, targetValue, duration) => {
+        const currentValue = parseFloat(element.textContent) || 0
+        let startTime = null
+        function step(timestamp) {
+            if (!startTime) {
+                startTime = timestamp
+            } 
+            const progress = Math.min((timestamp - startTime) / duration, 1) 
+            const currentNumber = Math.floor(currentValue + (targetValue - currentValue) * progress)
+            element.textContent = currentNumber + '₽'
+            if (progress < 1) {
+                requestAnimationFrame(step)
+            } else {
+                element.textContent = targetValue + '₽'
+            }
+        }
+        requestAnimationFrame(step)
+    }
     const calculateTheTotalAmount = () => {
         const allProductsInCart = document.querySelectorAll('.product')
         let sumAllOf = 0
         allProductsInCart.forEach(productElement => {
             sumAllOf += parseFloat(productElement.querySelector('.product-price').textContent)
         })
-        document.querySelector('.sum-of-all').textContent = `${sumAllOf}₽`
+        const totalElement = document.querySelector('.sum-of-all')
+        animateNumber(totalElement, sumAllOf, 1000)
     }
+
     calculateTheTotalAmount()
 
 })
