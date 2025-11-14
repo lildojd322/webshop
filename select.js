@@ -12,12 +12,27 @@ const changePriceRangeAndFilter = () => {
     allProducts.forEach((product) => {
         const productCategory = product.querySelector('.product-filter').textContent.toLowerCase().trim()
         const productPrice = parseFloat(product.querySelector('.product-price').textContent)
-        const categoryMatch = selectedCategory === 'все товары' || productCategory === selectedCategory
-        const priceMatch = (minPrice >= 0 && maxPrice > 0 && minPrice <= maxPrice)
-            ? (productPrice >= minPrice && productPrice <= maxPrice)
-            : true
-        product.style.display = 'flex'
-        product.style.display = (categoryMatch && priceMatch) ? 'flex' : 'none'
+        let categoryMatch
+        if (selectedCategory === 'все товары') {
+            categoryMatch = true
+        } else {
+            categoryMatch = productCategory === selectedCategory
+        }
+        let priceMatch
+        if (minPrice >= 0 && maxPrice > 0 && minPrice <= maxPrice) {
+            if (productPrice >= minPrice && productPrice <= maxPrice) {
+                priceMatch = true;
+            } else {
+                priceMatch = false;
+            }
+        } else {
+            priceMatch = true;
+        }
+        if (categoryMatch && priceMatch) {
+            product.style.display = 'flex'
+        } else {
+            product.style.display = 'none'
+        }
     })
 }
 
