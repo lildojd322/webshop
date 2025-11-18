@@ -1,4 +1,4 @@
-const form = document.querySelector('.form')
+const form = document.querySelector('form')
 const inputName = document.querySelector('.input-name')
 const inputPrice = document.querySelector('.input-price')
 const inputDescription = document.querySelector('.input-description')
@@ -145,27 +145,28 @@ class createProduct {
 }
 
 try {
+    const handleProductCreation = () => {
+        event.preventDefault()
+        const formData = new FormData(form)
+        const product = new createProduct(
+            formData.get('name'),
+            formData.get('price'),
+            formData.get('index'),
+            formData.get('filter'),
+            inputFile,
+            formData.get('description')
+        )
+        product.createNewProduct()
+    }
+    createButton.addEventListener('click', handleProductCreation)
     document.addEventListener('keyup', (event) => {
-        try {
-            if (event.key === 'Enter') {
-                const newProductObj = new createProduct(inputName.value, inputPrice.value, inputIndex.value, selectInput.value, inputFile, inputDescription.value)
-                if (newProductObj.name) {
-                    newProductObj.createNewProduct()
-                }
-            }
-        } catch (error) {
-            console.log(error.message)
-        }
-
-    })
-
-    createButton.addEventListener('click', () => {
-        const newProductObj = new createProduct(inputName.value, inputPrice.value, inputIndex.value, selectInput.value, inputFile, inputDescription.value)
-        if (newProductObj.name) {
-            newProductObj.createNewProduct()
+        event.preventDefault()
+        if (event.key === 'Enter') {
+            handleProductCreation()
         }
     })
 } catch (error) {
     console.log(error.message)
 }
+
 

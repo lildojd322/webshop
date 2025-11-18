@@ -12,6 +12,7 @@ const changePriceRangeAndFilter = () => {
     allProducts.forEach((product) => {
         const productCategory = product.querySelector('.product-filter').textContent.toLowerCase().trim()
         const productPrice = parseFloat(product.querySelector('.product-price').textContent)
+
         let categoryMatch
         if (selectedCategory === 'все товары') {
             categoryMatch = true
@@ -21,12 +22,12 @@ const changePriceRangeAndFilter = () => {
         let priceMatch
         if (minPrice >= 0 && maxPrice > 0 && minPrice <= maxPrice) {
             if (productPrice >= minPrice && productPrice <= maxPrice) {
-                priceMatch = true;
+                priceMatch = true
             } else {
-                priceMatch = false;
+                priceMatch = false
             }
         } else {
-            priceMatch = true;
+            priceMatch = true
         }
         if (categoryMatch && priceMatch) {
             product.style.display = 'flex'

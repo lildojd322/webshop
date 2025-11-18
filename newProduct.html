@@ -17,15 +17,15 @@
 <body>
     <button class="button-back"> вернуться</button>
     <div class="create-product-main">
-        <div class="create-container">
+        <form class="create-container">
             <input type="file" multiple class="input-icon">
-            <input type="text" minlength="6" placeholder="введите название товара" class="input-name">
-            <textarea class="input-description" minlength="6" placeholder="введите описание товара" name=""
-                id=""></textarea>
-            <input type="number" placeholder="введите цену товара" class="input-price">
-            <input type="text" placeholder="введите артикул (9 символов)" pattern="[0-9]{9}" minlength="9" maxlength="9"
-                class="input-index">
-            <select name="" id="">
+            <input type="text" name="name" minlength="6" placeholder="введите название товара" class="input-name">
+            <textarea name="description" class="input-description" minlength="6" placeholder="введите описание товара"
+                name="" id=""></textarea>
+            <input type="number" name="price" placeholder="введите цену товара" class="input-price">
+            <input type="text" name="index" placeholder="введите артикул (9 символов)" pattern="[0-9]{9}" minlength="9"
+                maxlength="9" class="input-index">
+            <select name="filter" id="">
                 <option value="" disabled selected>-- Выберите фильтр --</option>
                 <option value="быт">быт</option>
                 <option value="одежда">одежда</option>
@@ -37,7 +37,7 @@
             <button class="add-product-button">
                 Добавить
             </button>
-        </div>
+        </form>
     </div>
     <script src="./back.js"></script>
     <script src="./newProduct.js"></script>

@@ -65,7 +65,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 <div class="product-filter">${product.filter}</div>  
                 <button class="buy-product">в корзину</button>
         `
-        productsContainer.appendChild(productElement)
+        productsContainer.appendChild(productElement)   
     })
 
 
