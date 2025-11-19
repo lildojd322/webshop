@@ -26,7 +26,7 @@ try {
 
 
 class createProduct {
-    constructor(name, price, index, filter, fileInput, description) {
+    constructor(name, price, filter, fileInput, description) {
         this.loadAllIndexsFromLocalStorage()
         if (!name) {
             console.log('введите название товара')
@@ -66,32 +66,33 @@ class createProduct {
         } else {
             this.filter = filter
         }
-
-        if (!index) {
-            console.log('введите артикул товара')
-            return
-        } else if (index.length !== 9) {
-            console.log('артикул товара должен быть длинной в 9 символов')
-            return
-        } else {
-            const hasIndexInData = indexs.some(e => e === index)
-            if (hasIndexInData) {
-                console.log('такой артикул уже существует, создайте новый')
-                return
-            } else {
-                this.index = index
-                indexs.push(this.index)
-                this.saveAllIndexsToLocaleStorage()
-            }
-        }
-
         if (!fileInput || !fileInput.files || fileInput.files.length === 0) {
             console.log('выберите файл для товара')
             return
         } else {
             this.file = fileInput.files[0]
         }
+        const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0]
+        let index = ''
+        const generateRandomIndex = () => {
+            index = ''
+            for (let i = 0; i < 9; i++) {
+                const randomIndex = Math.floor(Math.random() * 10)
+                index += numbers[randomIndex]
+            }
 
+        }
+        generateRandomIndex()
+        const hasIndexInData = indexs.some(e => e === index)
+
+        if (!hasIndexInData && index.length === 9) {
+            this.index = index
+            indexs.push(this.index)
+            this.saveAllIndexsToLocaleStorage()
+        } else {
+            index = ''
+            generateRandomIndex()
+        }
     }
 
     createNewProduct() {
@@ -151,7 +152,6 @@ try {
         const product = new createProduct(
             formData.get('name'),
             formData.get('price'),
-            formData.get('index'),
             formData.get('filter'),
             inputFile,
             formData.get('description')
