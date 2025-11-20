@@ -6,7 +6,7 @@ const initializeSearchPage = () => {
 
         inputSearch.value = searchTerm
         mainContainerProducts.innerHTML = ''
-        const products = JSON.parse(localStorage.getItem('products')) || []
+        const products = document.querySelectorAll('.product')
 
         if (products.length === 0) {
             mainContainerProducts.innerHTML = '<p>Товары не найдены</p>'

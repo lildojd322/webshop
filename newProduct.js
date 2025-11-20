@@ -72,6 +72,8 @@ class createProduct {
         } else {
             this.file = fileInput.files[0]
         }
+
+
         const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0]
         let index = ''
         const generateRandomIndex = () => {
@@ -110,6 +112,7 @@ class createProduct {
     }
 
     saveProductToLocalStorage() {
+
         const existingProducts = JSON.parse(localStorage.getItem('products')) || []
         const productData = {
             name: this.name,
@@ -120,17 +123,34 @@ class createProduct {
             filter: this.filter,
             imageBase64: this.imageBase64,
         }
+
+
         existingProducts.push(productData)
+        fetch('http://localhost:3000/products', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(productData)
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Ошибка сети: ' + response.status)
+                }
+                return response.json()
+            })
 
-        localStorage.setItem('products', JSON.stringify(existingProducts))
+            .catch(error => {
+                console.error('Ошибка сохранения:', error)
+                alert('Ошибка при сохранении товара: ' + error.message)
+            })
 
-        console.log('Товар сохранен!')
+        console.log('Товар сохранен')
         inputName.value = ''
         inputDescription.value = ''
         inputPrice.value = ''
-        inputIndex.value = ''
         inputFile.value = ''
-
+        selectInput.selectedIndex = 0
     }
 
     saveAllIndexsToLocaleStorage() {
@@ -144,10 +164,11 @@ class createProduct {
         indexs = allIndexs || []
     }
 }
-
 try {
-    const handleProductCreation = () => {
+    form.addEventListener('submit', (event) => {
         event.preventDefault()
+        event.stopPropagation()
+
         const formData = new FormData(form)
         const product = new createProduct(
             formData.get('name'),
@@ -156,17 +177,14 @@ try {
             inputFile,
             formData.get('description')
         )
-        product.createNewProduct()
-    }
-    createButton.addEventListener('click', handleProductCreation)
-    document.addEventListener('keyup', (event) => {
-        event.preventDefault()
-        if (event.key === 'Enter') {
-            handleProductCreation()
+
+        if (product.name && product.price && product.filter && product.file && product.description) {
+            product.createNewProduct()
         }
     })
 } catch (error) {
     console.log(error.message)
 }
+
 
 

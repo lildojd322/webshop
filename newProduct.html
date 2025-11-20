@@ -17,7 +17,7 @@
 <body>
     <button class="button-back"> вернуться</button>
     <div class="create-product-main">
-        <form class="create-container">
+        <form class="create-container" method="post">
             <input type="file" multiple class="input-icon">
             <input type="text" name="name" minlength="6" placeholder="введите название товара" class="input-name">
             <textarea name="description" class="input-description" minlength="6" placeholder="введите описание товара"
@@ -32,7 +32,7 @@
                 <option value="аксессуары">аксессуары</option>
                 <option value="другое">другое</option>
             </select>
-            <button class="add-product-button">
+            <button type="submit" class="add-product-button">
                 Добавить
             </button>
         </form>
