@@ -32,16 +32,18 @@ button:hover {
 
 .products-container,
 .all-cart-products {
+    margin-top: 50px;
     margin-inline: auto;
     display: grid;
-    grid-template-columns: repeat(13, 13fr);
+    grid-template-columns: repeat(5, 5fr);
     flex-wrap: wrap;
 }
 
 .product-icon {
+    border-radius: 5px;
     margin-inline: auto;
-    width: 140px;
-    height: 160px !important;
+    width: 275px;
+    height: 400px !important;
 }
 
 .buy-product {
@@ -57,14 +59,14 @@ button:hover {
 }
 
 .product {
-    width: 150px;
+      width: 275px;
     position: relative;
     padding: 15px;
     border: 1px solid #e2e8f0;
     border-radius: 12px;
     display: flex;
     flex-direction: column;
-    height: 370px;
+    height: 590px;
     margin: 15px;
     background: #ffffff;
     transition: all 0.3s ease;
@@ -112,7 +114,6 @@ button:hover {
 }
 
 .search-container {
-    margin-top: 20px;
     position: absolute;
     width: 350px;
     right: 50%;

@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-    
+
     fetch(`http://localhost:3000/cartIndexs`)
         .then(response => {
             if (!response.ok) throw new Error('Ошибка загрузки корзины')
@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     if (!response.ok) throw new Error('Ошибка загрузки товаров')
                     return response.json()
                 })
-                .then(products => { 
+                .then(products => {
                     cartIndexs.forEach(cartItem => {
                         const product = products.find(p => p.index === cartItem.index)
                         if (product) {
