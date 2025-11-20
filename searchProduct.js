@@ -68,7 +68,6 @@ if (window.location.href.includes('searchProduct.html')) {
     document.addEventListener('DOMContentLoaded', () => {
         const inputSearch = document.querySelector('.search-product')
         initializeSearchPage()
-
         if (inputSearch) {
             inputSearch.addEventListener('change', handleSearchOnPage)
         }

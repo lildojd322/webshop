@@ -15,7 +15,6 @@ button {
     border: 2px solid #e2e8f0;
     outline: none;
     border-radius: 8px;
-    width: 150px;
     height: 30px;
     transition: all 0.2s ease;
 }
@@ -30,8 +29,7 @@ button:hover {
     display: flex;
 }
 
-.products-container,
-.all-cart-products {
+.products-container {
     margin-top: 50px;
     margin-inline: auto;
     display: grid;
@@ -59,7 +57,7 @@ button:hover {
 }
 
 .product {
-      width: 275px;
+    width: 275px;
     position: relative;
     padding: 15px;
     border: 1px solid #e2e8f0;
@@ -190,6 +188,7 @@ select:focus {
     border-radius: 8px;
 }
 
+
 .price-title {
     font-size: 16px;
     font-weight: 600;
@@ -250,52 +249,8 @@ price-input:focus {
     background-color: rgb(254, 80, 80);
 }
 
-.delete-product:hover {
-    background-color: rgb(254, 80, 80);
-    border: none;
-}
 
-.container-add-more-products {
-    display: flex;
-    align-items: center;
-    margin-top: 10px;
-    height: 30px;
-    justify-content: center;
-    font-size: 20px;
-    column-gap: 10px;
-}
 
-.container-add-more-products button {
-    width: 40px;
-}
-
-.info-container {
-    display: flex;
-    column-gap: 150px;
-    align-items: center;
-    width: 100%;
-}
-
-.sum-of-all {
-    font-style: italic;
-    font-weight: 500;
-    font-size: 18px;
-}
-
-@keyframes money-animation {
-    from {
-        transform: scale(1);
-    }
-
-    to {
-        transform: scale(1.2);
-    }
-}
-
-.sum-of-all {
-    transition: text-content 0.5s ease-in-out;
-    animation: money-animation 0.5s forwards;
-}
 
 @media (max-width: 1800px) {
     .products-container {

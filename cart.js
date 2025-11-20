@@ -34,12 +34,14 @@ document.addEventListener('DOMContentLoaded', () => {
                                 <img src="${product.imageBase64}" width="140px" height="170px"
                                     class="product-icon" alt="${product.name}">
                                 <div class="product-all-info">
-                                    <div class="product-price">${product.price} ₽</div>
                                     <div class="product-name">${product.name}</div>
-                                    <div class="product-index">${product.index}</div>      
+                                    <div class="product-index">${product.index}</div>
+                                     <div class="product-filter">${product.filter}</div>      
                                 </div>
-                                <div class="product-filter">${product.filter}</div>  
+                             <div class="product-other"> 
+                                <div class="product-price">${product.price} ₽</div>
                                 <button class="delete-product">удалить</button>
+                             </div>
                             `
 
                             const deleteButton = productElement.querySelector('.delete-product')
