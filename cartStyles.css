@@ -67,6 +67,10 @@ button:hover {
     width: 150px;
 }
 
+.delete-product {
+    width: 150px;
+}
+
 .delete-product:hover {
     background-color: rgb(254, 80, 80);
     border: none;
@@ -209,8 +213,10 @@ button:hover {
 
 .product-price {
     color: #2d3748;
-    margin-top: 10px;
+    margin-top: 4px;
+    width: 100px;
     font-size: 20px;
+    text-align: end;
     font-weight: 700;
 }
 
@@ -243,8 +249,33 @@ button:hover {
 .product-other {
     display: flex;
     
-    flex-direction: column;
-    align-items: end;
+    flex-direction: row;
+    column-gap: 50px;
+    align-items: start;
     justify-content: space-between; 
   
+}
+
+
+.add-more-product {
+    display: flex;
+    flex-direction: row;
+    width: 80px;
+    justify-content: space-between;
+    padding: 5px;
+
+}
+
+.more-button {
+    width: 20px;
+    aspect-ratio: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #cbd5e0;
+    border-radius: 5px;
+}
+
+.more-button:hover {
+    background-color: #c0cad4;
 }

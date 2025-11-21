@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
 
-    fetch(`http://localhost:3000/cartIndexs`)
+    fetch(`http://localhost:3000/cartItems`)
         .then(response => {
             if (!response.ok) throw new Error('Ошибка загрузки корзины')
             return response.json()
@@ -24,31 +24,100 @@ document.addEventListener('DOMContentLoaded', () => {
                             productElement.classList.add('product')
 
                             productElement.addEventListener('click', (event) => {
-                                if (!event.target.classList.contains('delete-product')) {
+                                if (!event.target.classList.contains('delete-product') && !event.target.closest('.add-more-product')) {
                                     localStorage.setItem('selectedProduct', JSON.stringify(product))
                                     window.location.href = './innerProduct.html'
                                 }
                             })
-
+                            const originalPrice = product.price
                             productElement.innerHTML = `
                                 <img src="${product.imageBase64}" width="140px" height="170px"
                                     class="product-icon" alt="${product.name}">
                                 <div class="product-all-info">
                                     <div class="product-name">${product.name}</div>
                                     <div class="product-index">${product.index}</div>
-                                     <div class="product-filter">${product.filter}</div>      
+                                     <div class="product-filter">${product.filter}</div>
+                                         <button class="delete-product">удалить</button>    
                                 </div>
+                                
                              <div class="product-other"> 
+                              <div class="add-more-product">
+                                   <div class="minus more-button">
+                                           -
+                                 </div>
+                                     <div class="number-products">
+                                            ${cartItem.quantity}
+                                           </div>
+                                      <div class="plus more-button">
+                                                  +
+                                           </div>
+                                      </div>    
                                 <div class="product-price">${product.price} ₽</div>
-                                <button class="delete-product">удалить</button>
+                               
                              </div>
                             `
+                            const plusButton = productElement.querySelector('.plus')
+                            const minusButton = productElement.querySelector('.minus')
+                            const quantityElement = productElement.querySelector('.number-products')
+                            const priceElement = productElement.querySelector('.product-price')
+
+                            plusButton.addEventListener('click', () => {
+                                cartItem.quantity++
+                                quantityElement.textContent = cartItem.quantity
+                                product.price = originalPrice * cartItem.quantity
+                                priceElement.textContent = `${product.price} ₽`
+                                calculateTheTotalAmount()
+
+                                fetch(`http://localhost:3000/cartItems/${cartItem.id}`, {
+                                    method: 'PATCH',
+                                    headers: {
+                                        'Content-Type': 'application/json'
+                                    },
+                                    body: JSON.stringify({
+                                        quantity: cartItem.quantity
+                                    })
+                                }).then(() => {
+                                    numberProductsInCart++
+                                    localStorage.setItem('indexProducts', numberProductsInCart)
+                                }).catch(error => {
+                                    console.log('Ошибка', error)
+                                })
+                            })
+
+                            minusButton.addEventListener('click', () => {
+                                if (cartItem.quantity > 1) {
+                                    cartItem.quantity--
+                                    quantityElement.textContent = cartItem.quantity
+                                    product.price = originalPrice * cartItem.quantity
+                                    priceElement.textContent = `${product.price} ₽`
+                                    calculateTheTotalAmount()
+                                } else {
+                                    return
+                                }
+
+                                fetch(`http://localhost:3000/cartItems/${cartItem.id}`, {
+                                    method: 'PATCH',
+                                    headers: {
+                                        'Content-Type': 'application/json'
+                                    },
+                                    body: JSON.stringify({
+                                        quantity: cartItem.quantity
+                                    })
+                                }).then(() => {
+                                    numberProductsInCart--
+                                    localStorage.setItem('indexProducts', numberProductsInCart)
+                                }).catch(error => {
+                                    console.log('Ошибка', error)
+                                })
+                            })
+                            product.price = originalPrice * cartItem.quantity
+                            priceElement.textContent = `${product.price} ₽`
 
                             const deleteButton = productElement.querySelector('.delete-product')
                             deleteButton.addEventListener('click', (event) => {
                                 event.stopPropagation()
 
-                                fetch(`http://localhost:3000/cartIndexs/${cartItem.id}`, {
+                                fetch(`http://localhost:3000/cartItems/${cartItem.id}`, {
                                     method: 'DELETE'
                                 }).then(() => {
 

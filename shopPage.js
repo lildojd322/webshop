@@ -64,42 +64,63 @@ document.addEventListener('DOMContentLoaded', function () {
                 </div>
                 <div class="product-filter">${product.filter}</div>  
                 <button class="buy-product" type="button">в корзину</button>
-        `
+                `
                 productsContainer.appendChild(productElement)
-
 
                 const buyButton = productElement.querySelector('.buy-product')
 
                 buyButton.addEventListener('click', (event) => {
                     event.preventDefault()
                     event.stopPropagation()
-                    const productIndex = {
-                        index: product.index,
-                    }
-                    cartProductsIndexs.push(productIndex)
-                    fetch(`http://localhost:3000/cartIndexs`, {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json'
-                        },
-                        body: JSON.stringify(productIndex)
-                    }).then((response) => {
-                        console.log('response:', response)
-                        if (!response.ok) {
-                            const errorMessage = response.status === 404
-                            productsContainer.innerHTML = '<p>Что-то пошло не так :(</p>'
-                            throw new Error(errorMessage)
-                        }
-                        return response.json()
-                    }).then(() => {
-                        numberProductsInCart++
-                        cartSquareElement.textContent = numberProductsInCart
-                        saveNumberProductInLocalStorage()
-                        checkNumber()
-                    }).catch((error) => {
-                        console.log(error.message)
-                        cartProductsIndexs = cartProductsIndexs.filter(index => index !== product.index)
-                    })
+                    numberProductsInCart++
+                    cartSquareElement.textContent = numberProductsInCart
+                    saveNumberProductInLocalStorage()
+                    checkNumber()
+                    fetch(`http://localhost:3000/cartItems`)
+                        .then(response => {
+                            if (!response.ok) throw new Error('Ошибка загрузки корзины')
+                            return response.json()
+                        })
+                        .then(cartItems => {
+                            const existingItem = cartItems.find(item => item.index === product.index)
+
+                            if (existingItem) {
+
+                                return fetch(`http://localhost:3000/cartItems/${existingItem.id}`, {
+                                    method: 'PATCH',
+                                    headers: {
+                                        'Content-Type': 'application/json'
+                                    },
+                                    body: JSON.stringify({
+                                        quantity: existingItem.quantity + 1
+                                    })
+                                })
+                            } else {
+                                const newCartItem = {
+                                    index: product.index,
+                                    quantity: 1
+                                }
+                                cartProductsIndexs.push(newCartItem)
+                                return fetch(`http://localhost:3000/cartItems`, {
+                                    method: 'POST',
+                                    headers: {
+                                        'Content-Type': 'application/json'
+                                    },
+                                    body: JSON.stringify(newCartItem)
+                                })
+                            }
+                        })
+                        .then((response) => {
+                            console.log('response:', response)
+                            if (!response.ok) {
+                                throw new Error('Ошибка добавления в корзину')
+                            }
+                            return response.json()
+                        })
+                        .catch((error) => {
+                            console.log(error.message)
+                            cartProductsIndexs = cartProductsIndexs.filter(item => item.index !== product.index)
+                        })
                 })
             })
         })
