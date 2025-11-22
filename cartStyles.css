@@ -239,28 +239,35 @@ button:hover {
 }
 
 .product-all-info {
-    row-gap: 8px;
+    row-gap: 6px;
     margin-left: 10px;
     display: flex;
     flex-direction: column;
     flex-grow: 1;
     width: 500px;
 }
+
 .product-other {
     display: flex;
-    
-    flex-direction: row;
-    column-gap: 50px;
+    flex-direction: column;
+    row-gap: 63px;
     align-items: start;
-    justify-content: space-between; 
-  
+
+}
+
+.price-func {
+    margin-top: 5px;
+    display: flex;
+    column-gap: 5px;
+    justify-content: center;
+    align-items: start;
 }
 
 
 .add-more-product {
     display: flex;
     flex-direction: row;
-    width: 80px;
+    width: 150px;
     justify-content: space-between;
     padding: 5px;
 
@@ -278,4 +285,13 @@ button:hover {
 
 .more-button:hover {
     background-color: #c0cad4;
+}
+
+.button-order-product {
+    width: 100%;
+}
+
+.button-order-product:hover {
+    border: none;
+    background-color: rgb(99, 209, 99);
 }

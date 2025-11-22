@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', () => {
                             productElement.classList.add('product')
 
                             productElement.addEventListener('click', (event) => {
-                                if (!event.target.classList.contains('delete-product') && !event.target.closest('.add-more-product')) {
+                                if (!event.target.classList.contains('delete-product') && !event.target.closest('.add-more-product') && !event.target.closest('.button-order-product')) {
                                     localStorage.setItem('selectedProduct', JSON.stringify(product))
                                     window.location.href = './innerProduct.html'
                                 }
@@ -42,6 +42,7 @@ document.addEventListener('DOMContentLoaded', () => {
                                 
                              <div class="product-other"> 
                               <div class="add-more-product">
+                               <div class="price-func">
                                    <div class="minus more-button">
                                            -
                                  </div>
@@ -53,7 +54,8 @@ document.addEventListener('DOMContentLoaded', () => {
                                            </div>
                                       </div>    
                                 <div class="product-price">${product.price} ₽</div>
-                               
+                                </div>
+                                    <button class="button-order-product">Заказать</button>
                              </div>
                             `
                             const plusButton = productElement.querySelector('.plus')
@@ -65,7 +67,7 @@ document.addEventListener('DOMContentLoaded', () => {
                                 cartItem.quantity++
                                 quantityElement.textContent = cartItem.quantity
                                 product.price = originalPrice * cartItem.quantity
-                                priceElement.textContent = `${product.price} ₽`
+                                animateNumber(priceElement, product.price, 400)
                                 calculateTheTotalAmount()
 
                                 fetch(`http://localhost:3000/cartItems/${cartItem.id}`, {
@@ -89,7 +91,7 @@ document.addEventListener('DOMContentLoaded', () => {
                                     cartItem.quantity--
                                     quantityElement.textContent = cartItem.quantity
                                     product.price = originalPrice * cartItem.quantity
-                                    priceElement.textContent = `${product.price} ₽`
+                                    animateNumber(priceElement, product.price, 400)
                                     calculateTheTotalAmount()
                                 } else {
                                     return
@@ -123,7 +125,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
                                     productElement.remove()
 
-                                    numberProductsInCart--
+                                    numberProductsInCart -= cartItem.quantity
                                     localStorage.setItem('indexProducts', numberProductsInCart)
 
                                     calculateTheTotalAmount()
@@ -179,7 +181,7 @@ document.addEventListener('DOMContentLoaded', () => {
             sumAllOf += parseFloat(productElement.querySelector('.product-price').textContent)
         })
         const totalElement = document.querySelector('.sum-of-all')
-        animateNumber(totalElement, sumAllOf, 1000)
+        animateNumber(totalElement, sumAllOf, 400)
     }
 
     calculateTheTotalAmount()
