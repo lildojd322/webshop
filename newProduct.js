@@ -34,8 +34,8 @@ class createProduct {
         } else if (name.length < 6) {
             console.log('название товара должно содержать больше 6 символов')
             return
-        } else if (name.length > 45) {
-            console.log('название товара не должен содержать больше 35 символов')
+        } else if (name.length > 20) {
+            console.log('название товара не должен содержать больше 20 символов')
             return
         }
         else {
@@ -74,13 +74,12 @@ class createProduct {
         }
 
 
-        const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0]
         let index = ''
         const generateRandomIndex = () => {
-            index = ''
-            for (let i = 0; i < 9; i++) {
+            index += Math.floor(Math.random() * 9) + 1
+            for (let i = 0; i < 8; i++) {
                 const randomIndex = Math.floor(Math.random() * 10)
-                index += numbers[randomIndex]
+                index += randomIndex
             }
 
         }

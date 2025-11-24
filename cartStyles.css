@@ -265,6 +265,7 @@ button:hover {
 
 
 .add-more-product {
+    column-gap: 10px;
     display: flex;
     flex-direction: row;
     width: 150px;
