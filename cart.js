@@ -58,6 +58,7 @@ document.addEventListener('DOMContentLoaded', () => {
                                     <button class="button-order-product">Заказать</button>
                              </div>
                             `
+
                             const plusButton = productElement.querySelector('.plus')
                             const minusButton = productElement.querySelector('.minus')
                             const quantityElement = productElement.querySelector('.number-products')
@@ -68,7 +69,9 @@ document.addEventListener('DOMContentLoaded', () => {
                                 quantityElement.textContent = cartItem.quantity
                                 product.price = originalPrice * cartItem.quantity
                                 animateNumber(priceElement, product.price, 400)
-                                calculateTheTotalAmount()
+                                setTimeout(() => {
+                                    calculateTheTotalAmount()
+                                }, 400)
 
                                 fetch(`http://localhost:3000/cartItems/${cartItem.id}`, {
                                     method: 'PATCH',
@@ -92,7 +95,9 @@ document.addEventListener('DOMContentLoaded', () => {
                                     quantityElement.textContent = cartItem.quantity
                                     product.price = originalPrice * cartItem.quantity
                                     animateNumber(priceElement, product.price, 400)
-                                    calculateTheTotalAmount()
+                                    setTimeout(() => {
+                                        calculateTheTotalAmount()
+                                    }, 100)
                                 } else {
                                     return
                                 }
@@ -128,8 +133,9 @@ document.addEventListener('DOMContentLoaded', () => {
                                     numberProductsInCart -= cartItem.quantity
                                     localStorage.setItem('indexProducts', numberProductsInCart)
 
-                                    calculateTheTotalAmount()
-
+                                    setTimeout(() => {
+                                        calculateTheTotalAmount()
+                                    }, 100)
                                     if (document.querySelectorAll('.product').length === 0) {
                                         cartProductsContainer.innerHTML = '<p>Корзина пуста</p>'
                                     }
@@ -141,8 +147,9 @@ document.addEventListener('DOMContentLoaded', () => {
                             cartProductsContainer.appendChild(productElement)
                         }
                     })
-
-                    calculateTheTotalAmount()
+                    setTimeout(() => {
+                        calculateTheTotalAmount()
+                    }, 100)
                 })
         })
         .catch(error => {
@@ -183,8 +190,6 @@ document.addEventListener('DOMContentLoaded', () => {
         const totalElement = document.querySelector('.sum-of-all')
         animateNumber(totalElement, sumAllOf, 400)
     }
-
     calculateTheTotalAmount()
-
 })
 

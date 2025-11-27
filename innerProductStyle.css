@@ -12,10 +12,9 @@ body {
     padding: 30px;
     border-radius: 16px;
     display: flex;
-    flex-direction: column;
-    row-gap: 25px;
+    column-gap: 28px;
     margin: 100px 20px 20px 20px;
-    width: 600px;
+    width: 900px;
     background: #ffffff;
 }
 
@@ -30,6 +29,8 @@ body {
 .product-inner-icon {
     margin-inline: auto;
     border-radius: 12px;
+    width: 525px;
+    height: 704px;
 }
 
 .product-inner-index {
@@ -38,11 +39,24 @@ body {
     font-size: 25px;
 }
 
+.product-inner-name {
+    font-size: 30px;
+    font-weight: 600;
+}
+
 .product-inner-all-info {
     row-gap: 15px;
     font-size: 30px;
+    width: 300px;
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
+}
+
+.text-info {
+    display: flex;
+    flex-direction: column;
+    row-gap: 15px;
 }
 
 .buy-inner-product,
@@ -55,6 +69,12 @@ body {
     border-radius: 8px;
     font-weight: 500;
     transition: all 0.2s ease;
+}
+
+.inner-buttons {
+    row-gap: 20px;
+    display: flex;
+    flex-direction: column;
 }
 
 .buy-inner-product:hover {

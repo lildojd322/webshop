@@ -15,14 +15,20 @@ document.addEventListener('DOMContentLoaded', () => {
             <img  src="${product.imageBase64}" width="440px" height="500px"
                  class="product-inner-icon" alt="${product.name}">
             <div class="product-inner-all-info">
-            <div class="product-inner-price">${product.price} ₽</div>
+            <div class="text-info">
                 <div class="product-inner-name">${product.name}</div>
+                 <div class="product-inner-price">${product.price} ₽</div>
                  <div class="product-inner-description">${product.description}</div>
                 <div class="product-inner-index">${product.index}</div>      
-           
-              <div class="product-inner-filter">${product.filter}</div>  
-            <button class="buy-inner-product">купить сейчас</button>
+
+                    <div class="product-inner-filter">${product.filter}</div> 
+                     </div> 
+              <div class="inner-buttons">
+    
+               <button class="buy-inner-product">купить сейчас</button>
             <button class="buy-product">в корзину</button> 
+              </div>
+            
             </div>
         `
     document.body.appendChild(productElement)
