@@ -268,7 +268,7 @@ button:hover {
     column-gap: 10px;
     display: flex;
     flex-direction: row;
-    width: 150px;
+    width: 200px;
     justify-content: space-between;
     padding: 5px;
 

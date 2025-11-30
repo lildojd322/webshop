@@ -1,26 +1,9 @@
+import { updateCartCount } from "./cartProductsCounter.js"
 document.addEventListener('DOMContentLoaded', function () {
     let cartProductsIndexs = []
 
-    const cartSquareElement = document.querySelector('.square-cart')
-    let numberProductsInCart
-    const saveNumberProductInLocalStorage = () => {
-        numberProductsInCart = +(cartSquareElement.textContent)
-        localStorage.setItem('indexProducts', numberProductsInCart)
-    }
-    const loadNumberProductFromLocalStorage = () => {
-        numberProductsInCart = +(localStorage.getItem('indexProducts'))
-    }
-    loadNumberProductFromLocalStorage()
-    const checkNumber = () => {
-        if (numberProductsInCart > 0 && numberProductsInCart < 100) {
-            cartSquareElement.style.cssText = 'display: flex;'
-            cartSquareElement.textContent = numberProductsInCart
-        } else if (numberProductsInCart >= 100) {
-            cartSquareElement.style.cssText = 'display: flex;'
-            cartSquareElement.textContent = `+99`
-        }
-    }
-    checkNumber()
+
+
     const productsContainer = document.querySelector('.products-container')
 
     if (!productsContainer) return
@@ -72,10 +55,6 @@ document.addEventListener('DOMContentLoaded', function () {
                 buyButton.addEventListener('click', (event) => {
                     event.preventDefault()
                     event.stopPropagation()
-                    numberProductsInCart++
-                    cartSquareElement.textContent = numberProductsInCart
-                    saveNumberProductInLocalStorage()
-                    checkNumber()
                     fetch(`http://localhost:3000/cartItems`)
                         .then(response => {
                             if (!response.ok) throw new Error('Ошибка загрузки корзины')
@@ -116,6 +95,9 @@ document.addEventListener('DOMContentLoaded', function () {
                                 throw new Error('Ошибка добавления в корзину')
                             }
                             return response.json()
+                        })
+                        .then(() => {
+                             updateCartCount()
                         })
                         .catch((error) => {
                             console.log(error.message)

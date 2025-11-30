@@ -1,3 +1,7 @@
+document.addEventListener('DOMContentLoaded', () => {
+
+
+
 const initializeSearchPage = () => {
     const inputSearch = document.querySelector('.search-product')
     const mainContainerProducts = document.querySelector('.products-container')
@@ -73,3 +77,4 @@ if (window.location.href.includes('searchProduct.html')) {
         }
     })
 }
+})

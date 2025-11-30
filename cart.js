@@ -1,3 +1,5 @@
+import { updateCartCount } from "./cartProductsCounter.js"
+
 document.addEventListener('DOMContentLoaded', () => {
 
     fetch(`http://localhost:3000/cartItems`)
@@ -68,10 +70,11 @@ document.addEventListener('DOMContentLoaded', () => {
                                 cartItem.quantity++
                                 quantityElement.textContent = cartItem.quantity
                                 product.price = originalPrice * cartItem.quantity
+                                updateCartCount()
                                 animateNumber(priceElement, product.price, 400)
                                 setTimeout(() => {
                                     calculateTheTotalAmount()
-                                }, 400)
+                                }, 410)
 
                                 fetch(`http://localhost:3000/cartItems/${cartItem.id}`, {
                                     method: 'PATCH',
@@ -82,8 +85,8 @@ document.addEventListener('DOMContentLoaded', () => {
                                         quantity: cartItem.quantity
                                     })
                                 }).then(() => {
-                                    numberProductsInCart++
-                                    localStorage.setItem('indexProducts', numberProductsInCart)
+
+
                                 }).catch(error => {
                                     console.log('Ошибка', error)
                                 })
@@ -94,10 +97,11 @@ document.addEventListener('DOMContentLoaded', () => {
                                     cartItem.quantity--
                                     quantityElement.textContent = cartItem.quantity
                                     product.price = originalPrice * cartItem.quantity
+                                    updateCartCount()
                                     animateNumber(priceElement, product.price, 400)
                                     setTimeout(() => {
                                         calculateTheTotalAmount()
-                                    }, 100)
+                                    }, 410)
                                 } else {
                                     return
                                 }
@@ -111,8 +115,8 @@ document.addEventListener('DOMContentLoaded', () => {
                                         quantity: cartItem.quantity
                                     })
                                 }).then(() => {
-                                    numberProductsInCart--
-                                    localStorage.setItem('indexProducts', numberProductsInCart)
+                                    updateCartCount()
+
                                 }).catch(error => {
                                     console.log('Ошибка', error)
                                 })
@@ -127,12 +131,9 @@ document.addEventListener('DOMContentLoaded', () => {
                                 fetch(`http://localhost:3000/cartItems/${cartItem.id}`, {
                                     method: 'DELETE'
                                 }).then(() => {
-
+                                    cartIndexs.quantity = 0
+                                    updateCartCount()
                                     productElement.remove()
-
-                                    numberProductsInCart -= cartItem.quantity
-                                    localStorage.setItem('indexProducts', numberProductsInCart)
-
                                     setTimeout(() => {
                                         calculateTheTotalAmount()
                                     }, 100)
@@ -160,7 +161,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
     const cartProductsContainer = document.querySelector('.all-cart-products')
-    let numberProductsInCart = +(localStorage.getItem('indexProducts'))
 
 
     const animateNumber = (element, targetValue, duration) => {
