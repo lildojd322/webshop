@@ -14,5 +14,11 @@
   "profile": {
     "name": "typicode"
   },
-  "cartItems": []
+  "cartItems": [
+    {
+      "id": "f72c",
+      "index": "977002309",
+      "quantity": 6
+    }
+  ]
 }

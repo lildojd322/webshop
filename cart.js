@@ -68,9 +68,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
                             plusButton.addEventListener('click', () => {
                                 cartItem.quantity++
+                                updateCartCount()
                                 quantityElement.textContent = cartItem.quantity
                                 product.price = originalPrice * cartItem.quantity
-                                updateCartCount()
+
                                 animateNumber(priceElement, product.price, 400)
                                 setTimeout(() => {
                                     calculateTheTotalAmount()
@@ -85,6 +86,7 @@ document.addEventListener('DOMContentLoaded', () => {
                                         quantity: cartItem.quantity
                                     })
                                 }).then(() => {
+                                    updateCartCount()
 
 
                                 }).catch(error => {
@@ -95,9 +97,10 @@ document.addEventListener('DOMContentLoaded', () => {
                             minusButton.addEventListener('click', () => {
                                 if (cartItem.quantity > 1) {
                                     cartItem.quantity--
+                                    updateCartCount()
                                     quantityElement.textContent = cartItem.quantity
                                     product.price = originalPrice * cartItem.quantity
-                                    updateCartCount()
+
                                     animateNumber(priceElement, product.price, 400)
                                     setTimeout(() => {
                                         calculateTheTotalAmount()
