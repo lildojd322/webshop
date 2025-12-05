@@ -1,10 +1,14 @@
 import { updateCartCount } from "./cartProductsCounter.js"
 document.addEventListener('DOMContentLoaded', function () {
     let cartProductsIndexs = []
+    if (window.location.href.includes('searchProduct.html')) {
+        return
+    }
 
 
 
     const productsContainer = document.querySelector('.products-container')
+        const inputSearch = document.querySelector('.search-product')
 
     if (!productsContainer) return
 
@@ -97,7 +101,7 @@ document.addEventListener('DOMContentLoaded', function () {
                             return response.json()
                         })
                         .then(() => {
-                             updateCartCount()
+                            updateCartCount()
                         })
                         .catch((error) => {
                             console.log(error.message)
@@ -111,7 +115,3 @@ document.addEventListener('DOMContentLoaded', function () {
         })
 })
 
-const remove = () => {
-    localStorage.removeItem('indexProducts')
-}
-//remove()
