@@ -7,28 +7,61 @@
     <title>cart</title>
     <link rel="icon" href="./svg/3176363.png">
     <link rel="stylesheet" href="./cartStyles.css">
+    <link rel="stylesheet" href="./navStyles.css">
 
 </head>
 
 <body>
-    <div class="search-container">
-        <input type="text" placeholder="Найти" class="search-product">
-    </div>
+    <nav class="nav">
 
-    <div class="info-container">
-        <button class="button-back">вернуться</button>
-        <div>общая цена всех товаров: <span class="sum-of-all"></span>
+        <input id="burger-toggle" type="checkbox">
+        <label class="label" for="burger-toggle">
+            <span></span>
+        </label>
+
+        <ul class="header__list">
+            <li>
+                <a href="./main.html" class="header__link">Главная</a>
+            </li>
+            <li>
+                <button class="add-my-product-button">
+                    <a href="./newProduct.html">добавить свой товар</a>
+                </button>
+            </li>
+            <li>
+                <div class="price-range">
+                    <div class="price-title">Цена, ₽</div>
+                    <div class="price-input-group">
+                        <label class="price-label">От</label>
+                        <input type="number" class="price-input" id="first-input">
+                    </div>
+                    <div class="price-input-group">
+                        <label class="price-label">До</label>
+                        <input type="number" class="price-input" id="second-input">
+                    </div>
+                    <button class="range-button">применить</button>
+                </div>
+            </li>
+        </ul>
+
+        <div class="search-container">
+            <input type="text" placeholder="Найти" class="search-product">
         </div>
+        <div class="nav-right">
+            <div>общая цена всех товаров: <span class="sum-of-all"></span>
+            </div>
 
-    </div>
-    <h2>Корзина</h2>
+
+        </div>
+    </nav>
+     <button class="button-back"> вернуться</button>
 
     <div class="all-cart-products">
 
     </div>
     <script src="./search.js"></script>
     <script src="./back.js"></script>
-    <script type="module"  src="./cart.js"></script>
+    <script type="module" src="./cart.js"></script>
 </body>
 
 </html>

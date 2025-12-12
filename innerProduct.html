@@ -4,6 +4,7 @@
 <head>
     <link rel="stylesheet" href="./main.css">
     <link rel="stylesheet" href="./innerProductStyle.css">
+    <link rel="stylesheet" href="./navStyles.css">
     <meta charset="UTF-8">
     <link rel="icon" href="./svg/3176363.png">
 
@@ -13,15 +14,50 @@
 
 <body>
     <div class="main-info">
-        <button class="button-back"> вернуться</button>
-        <div class="search-container">
-            <input type="text" placeholder="Найти" class="search-product">
-        </div>
+        <nav class="nav">
 
-        <a href="./cartPage.html" class="cart">
-            <img src="./svg/Frame 217.svg" width="25" height="25" alt="cart">
-            <span class="square-cart"> </span>
-        </a>
+            <input id="burger-toggle" type="checkbox">
+            <label class="label" for="burger-toggle">
+                <span></span>
+            </label>
+
+            <ul class="header__list">
+                <li>
+                    <a href="./main.html" class="header__link">Главная</a>
+                </li>
+                <li>
+                    <button class="add-my-product-button">
+                        <a href="./newProduct.html">добавить свой товар</a>
+                    </button>
+                </li>
+                <li>
+                    <div class="price-range">
+                        <div class="price-title">Цена, ₽</div>
+                        <div class="price-input-group">
+                            <label class="price-label">От</label>
+                            <input type="number" class="price-input" id="first-input">
+                        </div>
+                        <div class="price-input-group">
+                            <label class="price-label">До</label>
+                            <input type="number" class="price-input" id="second-input">
+                        </div>
+                        <button class="range-button">применить</button>
+                    </div>
+                </li>
+            </ul>
+
+            <div class="search-container">
+                <input type="text" placeholder="Найти" class="search-product">
+            </div>
+            <div class="nav-right">
+                <a href="./cartPage.html" class="cart">
+                    <img src="./svg/Frame 217.svg" width="25" height="25" alt="cart">
+                    <span class="square-cart"></span>
+                </a>
+            </div>
+        </nav>
+        <button class="button-back"> вернуться</button>
+
 
     </div>
     <script src="./back.js"></script>
