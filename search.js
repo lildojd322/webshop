@@ -14,7 +14,7 @@ const redirect = (input) => {
 if (inputSearch) {
     magnifier.addEventListener('click', () => {
         redirect(inputSearch)
-    } )
+    })
     document.addEventListener('keyup', event => {
         if (event.code === 'Enter') {
             redirect(inputSearch)
