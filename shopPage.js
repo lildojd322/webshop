@@ -29,26 +29,26 @@ document.addEventListener('DOMContentLoaded', function () {
             return response.json()
         })
         .then((productData) => {
-            setTimeout(() => {
-                if (productData.length === 0) {
-                    productsContainer.innerHTML = '<p>Товаров пока нет</p>'
-                    return
-                }
-                productsContainer.innerHTML = ''
-                productData.forEach(product => {
-                    const productElement = document.createElement('div')
-                    productElement.classList.add('product')
-                    productElement.addEventListener('click', (event) => {
-                        if (!event.target.classList.contains('buy-product')) {
-                            localStorage.setItem('selectedProduct', JSON.stringify(product))
-                            window.location.href = './innerProduct.html'
-                        }
-                    })
-                    if (window.location.href.includes('innerProduct.html')) {
-                        const titleProductPage = document.querySelector('title')
-                        titleProductPage.textContent = product.name
+
+            if (productData.length === 0) {
+                productsContainer.innerHTML = '<p>Товаров пока нет</p>'
+                return
+            }
+            productsContainer.innerHTML = ''
+            productData.forEach(product => {
+                const productElement = document.createElement('div')
+                productElement.classList.add('product')
+                productElement.addEventListener('click', (event) => {
+                    if (!event.target.classList.contains('buy-product')) {
+                        localStorage.setItem('selectedProduct', JSON.stringify(product))
+                        window.location.href = './innerProduct.html'
                     }
-                    productElement.innerHTML = `
+                })
+                if (window.location.href.includes('innerProduct.html')) {
+                    const titleProductPage = document.querySelector('title')
+                    titleProductPage.textContent = product.name
+                }
+                productElement.innerHTML = `
                 <img  src="${product.imageBase64}" width="140px" height="170px"
                     class="product-icon" alt="${product.name}">
                 <div class="product-all-info">
@@ -59,65 +59,63 @@ document.addEventListener('DOMContentLoaded', function () {
                 <div class="product-filter">${product.filter}</div>  
                 <button class="buy-product" type="button">в корзину</button>
                 `
-                    productsContainer.appendChild(productElement)
+                productsContainer.appendChild(productElement)
 
-                    const buyButton = productElement.querySelector('.buy-product')
+                const buyButton = productElement.querySelector('.buy-product')
 
-                    buyButton.addEventListener('click', (event) => {
-                        event.preventDefault()
-                        event.stopPropagation()
-                        fetch(`http://localhost:3000/cartItems`)
-                            .then(response => {
-                                if (!response.ok) throw new Error('Ошибка загрузки корзины')
-                                return response.json()
-                            })
-                            .then(cartItems => {
-                                const existingItem = cartItems.find(item => item.index === product.index)
+                buyButton.addEventListener('click', (event) => {
+                    event.preventDefault()
+                    event.stopPropagation()
+                    fetch(`http://localhost:3000/cartItems`)
+                        .then(response => {
+                            if (!response.ok) throw new Error('Ошибка загрузки корзины')
+                            return response.json()
+                        })
+                        .then(cartItems => {
+                            const existingItem = cartItems.find(item => item.index === product.index)
 
-                                if (existingItem) {
+                            if (existingItem) {
 
-                                    return fetch(`http://localhost:3000/cartItems/${existingItem.id}`, {
-                                        method: 'PATCH',
-                                        headers: {
-                                            'Content-Type': 'application/json'
-                                        },
-                                        body: JSON.stringify({
-                                            quantity: existingItem.quantity + 1
-                                        })
+                                return fetch(`http://localhost:3000/cartItems/${existingItem.id}`, {
+                                    method: 'PATCH',
+                                    headers: {
+                                        'Content-Type': 'application/json'
+                                    },
+                                    body: JSON.stringify({
+                                        quantity: existingItem.quantity + 1
                                     })
-                                } else {
-                                    const newCartItem = {
-                                        index: product.index,
-                                        quantity: 1
-                                    }
-                                    cartProductsIndexs.push(newCartItem)
-                                    return fetch(`http://localhost:3000/cartItems`, {
-                                        method: 'POST',
-                                        headers: {
-                                            'Content-Type': 'application/json'
-                                        },
-                                        body: JSON.stringify(newCartItem)
-                                    })
+                                })
+                            } else {
+                                const newCartItem = {
+                                    index: product.index,
+                                    quantity: 1
                                 }
-                            })
-                            .then((response) => {
-                                console.log('response:', response)
-                                if (!response.ok) {
-                                    throw new Error('Ошибка добавления в корзину')
-                                }
-                                return response.json()
-                            })
-                            .then(() => {
-                                updateCartCount()
-                            })
-                            .catch((error) => {
-                                console.log(error.message)
-                                cartProductsIndexs = cartProductsIndexs.filter(item => item.index !== product.index)
-                            })
-                    })
+                                cartProductsIndexs.push(newCartItem)
+                                return fetch(`http://localhost:3000/cartItems`, {
+                                    method: 'POST',
+                                    headers: {
+                                        'Content-Type': 'application/json'
+                                    },
+                                    body: JSON.stringify(newCartItem)
+                                })
+                            }
+                        })
+                        .then((response) => {
+                            console.log('response:', response)
+                            if (!response.ok) {
+                                throw new Error('Ошибка добавления в корзину')
+                            }
+                            return response.json()
+                        })
+                        .then(() => {
+                            updateCartCount()
+                        })
+                        .catch((error) => {
+                            console.log(error.message)
+                            cartProductsIndexs = cartProductsIndexs.filter(item => item.index !== product.index)
+                        })
                 })
-            }, 300)
-
+            })
         })
         .catch((error) => {
             productsContainer.innerHTML = 'что-то пошло не так :('
