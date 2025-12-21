@@ -9,7 +9,7 @@ const productsContainer = document.querySelector('.products-container')
 const selectInput = document.querySelector('select')
 
 
-
+const allowedExtensions = ['jpg', 'jpeg', 'png', 'gif', 'bmp', 'webp'];
 let indexs = []
 
 try {
@@ -66,11 +66,20 @@ class createProduct {
         } else {
             this.filter = filter
         }
+
+        const file = fileInput.files[0];
+        const fileName = file.name;
+        const fileExtension = fileName.substring(fileName.lastIndexOf('.') + 1).toLowerCase();
+
         if (!fileInput || !fileInput.files || fileInput.files.length === 0) {
-            console.log('выберите файл для товара')
+            console.log('выберите обложку товара')
             return
-        } else {
-            this.file = fileInput.files[0]
+        } else if (!allowedExtensions.includes(fileExtension)) {
+            console.log('выберите  корректную обложку товара (JPG, PNG, GIF, BMP, WebP)')
+            return
+        }
+        else {
+            this.file = file
         }
 
 
@@ -111,8 +120,6 @@ class createProduct {
     }
 
     saveProductToLocalStorage() {
-
-        const existingProducts = JSON.parse(localStorage.getItem('products')) || []
         const productData = {
             name: this.name,
             description: this.description,
@@ -124,7 +131,6 @@ class createProduct {
         }
 
 
-        existingProducts.push(productData)
         fetch('http://localhost:3000/products', {
             method: 'POST',
             headers: {
