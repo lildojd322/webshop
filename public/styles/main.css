@@ -48,6 +48,8 @@ a {
 
 .products-container {
     margin-top: 50px;
+    color: #2d3748;
+    
     margin-inline: auto;
     display: grid;
     grid-template-columns: repeat(6, 6fr);

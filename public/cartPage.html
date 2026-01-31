@@ -2,18 +2,17 @@
 <html lang="en">
 
 <head>
-    <link rel="icon" href="./svg/3176363.png">
-    <link rel="stylesheet" href="./navStyles.css">
-    <link rel="stylesheet" href="./backbutton.css">
-
-    <link rel="stylesheet" href="./main.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>поиск по запросу</title>
+    <title>cart</title>
+    <link rel="icon" href="./svg/3176363.png">
+    <link rel="stylesheet" href="./styles/cartStyles.css">
+    <link rel="stylesheet" href="./styles/navStyles.css">
+    <link rel="stylesheet" href="./styles/backbutton.css">
+
 </head>
 
 <body>
-
     <nav class="nav">
 
         <input id="burger-toggle" type="checkbox">
@@ -53,34 +52,20 @@
             </div>
         </div>
         <div class="nav-right">
-            <a href="./cartPage.html" class="cart">
-                <img src="./svg/Frame 217.svg" width="25" height="25" alt="cart">
-                <span class="square-cart"></span>
-            </a>
-            <select name="" id="">
-                <option value="все товары" selected>все товары</option>
-                <option value="быт">быт</option>
-                <option value="одежда">одежда</option>
-                <option value="книги">книги</option>
-                <option value="техника">техника</option>
-                <option value="аксессуары">аксессуары</option>
-                <option value="искусство">искусство</option>
-                <option value="другое">другое</option>
-            </select>
+            <div>общая цена всех товаров: <span class="sum-of-all"></span>
+            </div>
+
+
         </div>
     </nav>
     <button class="button-back"> вернуться</button>
-    <section class="main">
-        <div class="products-container">
-    </section>
+
+    <div class="all-cart-products">
 
     </div>
-    <script src="./searchProduct.js"></script>
+    <script src="./search.js"></script>
     <script src="./back.js"></script>
-    <script src="./select.js"></script>
-    <script type="module" src="./cartProductsCounter.js"></script>
-
+    <script type="module" src="./cart.js"></script>
 </body>
-
 
 </html>
